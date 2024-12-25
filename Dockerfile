@@ -18,8 +18,7 @@ ENV RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 RUN dpkgArch="$(dpkg --print-architecture)"; \
     case "${dpkgArch##*-}" in \
         amd64) sed -i "s@http://.*archive.ubuntu.com@http://mirrors.huaweicloud.com@g" /etc/apt/sources.list && sed -i "s@http://.*security.ubuntu.com@http://mirrors.huaweicloud.com@g" /etc/apt/sources.list ;; \
-        arm64) sed -i "s@http://ports.ubuntu.com@https://mirrors.huaweicloud.com@g" /etc/apt/sources.list
-        ;; \
+        arm64) sed -i "s@http://ports.ubuntu.com@https://mirrors.huaweicloud.com@g" /etc/apt/sources.list ;; \
         *) echo >&2 "unsupported architecture: ${dpkgArch}" ;; \
     esac; 
 

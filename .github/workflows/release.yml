@@ -47,7 +47,7 @@ jobs:
           labels: |
             org.opencontainers.image.description=vnc
             org.opencontainers.image.title=vnc
-      - name: Build musl Image
+      - name: Build
         uses: docker/build-push-action@v5
         id: build
         with:
