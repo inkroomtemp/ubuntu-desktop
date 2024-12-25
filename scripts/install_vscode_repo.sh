@@ -5,11 +5,12 @@ set -e
 export DEBIAN_FRONTEND="noninteractive"
 
 apt-get update
-apt-get install -y gnupg2 software-properties-common apt-transport-https wget libasound2 libgbm1
+apt-get install -y gnupg2 software-properties-common apt-transport-https wget libasound2 libgbm1 gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+rm -f packages.microsoft.gpg
 
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key --keyring /etc/apt/trusted.gpg.d/microsoft.gpg add -
-# add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list
 
 apt-get update
 apt-get install -y code
